@@ -1,5 +1,10 @@
 import java.util.ArrayList;
 
+/**
+ * @author Tyler Hogue
+ * @version 5.2.2018
+ *
+ */
 public class StreetNodes implements Comparable<StreetNodes>{
 
     private String name;
@@ -45,11 +50,31 @@ public class StreetNodes implements Comparable<StreetNodes>{
     }
     
     /**
+     * Adds a node that the street goes through
+     * @param node the location the street will traverse through
+     * @return whether or not node was added
+     */
+    public boolean addPoint(Node<Point> node) {
+        if (node == null) {
+            return false;
+        }
+        
+        locations.add(node);
+        return true;
+    }
+    
+    /**
      * Prints the name of the street, 
      * followed by the list of locations on the street
      * @return string representation of street data
      */
     public String toString() {
-        return name + ": " + locations.toString();
+        String nodeStr = "";
+        
+        for(int i = 0; i < locations.size(); i++) {
+            nodeStr += locations.get(i).getPoint().toString() + " ";
+        }
+        
+        return name + ": " + nodeStr;
     }
 }
