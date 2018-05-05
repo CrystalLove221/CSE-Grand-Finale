@@ -7,9 +7,11 @@ import java.util.ArrayList;
  * @version 2018.04.20
  * @param <E> a generic, in this case will be Point
  */
-public class Node<E> {
+public class Node<E> implements Comparable<Node<E>> {
     private E data;
     private ArrayList<String> list;
+    private ArrayList<String> streets;
+    private double distance;
     
     /**
      * O(1)
@@ -20,6 +22,8 @@ public class Node<E> {
     public Node(E data, ArrayList<String> list) {
         this.data = data;
         this.list = list;
+        this.setDistance(0);
+        this.setStreets(new ArrayList<String>());
     }
 
     /*
@@ -76,4 +80,26 @@ public class Node<E> {
         
         return list.toString() + " @ " + data.toString();
     }
+
+	public double getDistance() {
+		return distance;
+	}
+
+	public void setDistance(double distance) {
+		this.distance = distance;
+	}
+
+	public ArrayList<String> getStreets() {
+		return streets;
+	}
+
+	public void setStreets(ArrayList<String> streets) {
+		this.streets = streets;
+	}
+
+	@Override
+	public int compareTo(Node<T> arg0) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
