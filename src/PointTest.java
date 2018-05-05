@@ -10,6 +10,9 @@ public class PointTest extends TestCase {
     private Point a;
     private Point b;
 
+    /**
+     * testing environment for point
+     */
     public void setUp() {
         a = new Point(6, 7);
         b = new Point(3, 7);

@@ -10,6 +10,8 @@ import student.TestCase;
  */
 public class NodeTest extends TestCase {
     private Node<Point> node1;
+    private Node<Point> node2;
+    private ArrayList<String> streets;
     private ArrayList<String> list1;
     private ArrayList<String> list2;
     
@@ -19,7 +21,9 @@ public class NodeTest extends TestCase {
     public void setUp() {
         list1 = new ArrayList<String>();
         list2 = new ArrayList<String>();
+        streets = new ArrayList<String>();
         node1 = new Node<Point>(new Point(1, 1), list1);
+        node2 = new Node<Point>(new Point(2, 1), list2);
     }
     
     /**
@@ -74,5 +78,51 @@ public class NodeTest extends TestCase {
 
         node1.setPoint(null);
         assertEquals("A location has not been set", node1.toString());
+    }
+    
+    /**
+     * return the list of streets next to location
+     */
+    public void testGetStreets() {
+        assertEquals("[]", node1.getStreets().toString());
+    }
+    
+    /**
+     * set the list of streets next to location
+     */
+    public void testSetStreets() {
+        streets.add("A");
+        streets.add("B");
+        
+        node1.setStreets(streets);
+        
+        assertEquals("[A, B]", node1.getStreets().toString());
+    }
+    
+    /**
+     * test return value of distance from origin point
+     */
+    public void testGetDistance() {
+        assertEquals(0, node1.getDistance(), 0.0);
+    }
+    
+    /**
+     * test settinig distance of the node from origin
+     */
+    public void testSetDistance() {
+        node1.setDistance(4.1);
+        assertEquals(4.1, node1.getDistance(), 0.0);
+    }
+    
+    /**
+     * test comparison of distances from the origin
+     */
+    public void testCompareTo() {
+        assertEquals(0, node1.compareTo(node1));
+        
+        node1.setDistance(3);
+        
+        assertEquals(1, node1.compareTo(node2));
+        assertEquals(-1, node2.compareTo(node1));
     }
 }

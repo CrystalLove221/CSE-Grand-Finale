@@ -20,22 +20,41 @@ public class Point {
         this.y = y;
     }
 
+    /**
+     * @return the x coordinate of the location
+     */
     public int getX() {
         return x;
     }
 
+    /**
+     * @return the y coordinate of the location
+     */
     public int getY() {
         return y;
     }
 
+    /**
+     * @param x x coordinate of location
+     * @return x coordinate
+     */
     public int setX(int x) {
         return this.x = x;
     }
 
+    /**
+     * @param y y coordinate
+     * @return y coordinate
+     */
     public int setY(int y) {
         return this.y = y;
     }
 
+    /**
+     * @param o the location to compare to
+     * @return whether or not two locations are the same
+     * 
+     */
     public boolean equals(Object o) {
         if (o == null) {
             return false;
@@ -46,6 +65,10 @@ public class Point {
         return false;
     }
 
+    /**
+     * @return the string representation of the coordinate (x, y)
+     * 
+     */
     public String toString() {
         return "(" + x + "," + y + ")";
     }
