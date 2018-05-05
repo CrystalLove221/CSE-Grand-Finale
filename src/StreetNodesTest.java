@@ -4,7 +4,7 @@ import student.TestCase;
 
 /**
  * @author Tyler Hogue
- * @version 5.2.2018
+ * @version 5.5.2018
  *
  */
 public class StreetNodesTest extends TestCase {
@@ -14,6 +14,9 @@ public class StreetNodesTest extends TestCase {
     private ArrayList<Node<Point>> nodes1;
     private ArrayList<Node<Point>> nodes2;
     
+    /**
+     * Setup environment for testing
+     */
     public void setUp() {
         street1 = new StreetNodes("Fouh");
         street2 = new StreetNodes("SnoopDogg");
@@ -51,15 +54,27 @@ public class StreetNodesTest extends TestCase {
         
     }
     
+    /**
+     * test returning name of street
+     * O(1)
+     */
     public void testGetName() {
         assertEquals("Fouh", street1.getName());
     }
     
+    /**
+     * Test setting name of street
+     * O(1)
+     */
     public void testSetName() {
         street1.setName("Jake");
         assertEquals("Jake", street1.getName());
     }
     
+    /**
+     * Test getting list of nodes through street
+     * O(1)
+     */
     public void testGetLocations() {
         
         street1.setLocations(nodes1);
@@ -67,6 +82,11 @@ public class StreetNodesTest extends TestCase {
         assertEquals(nodes1, street1.getLocations());
     }
     
+    /**
+     * Test setting the list of nodes
+     * street passes through
+     * O(1)
+     */
     public void testSetLocations() {
         
         street1.setLocations(nodes1);
@@ -75,6 +95,10 @@ public class StreetNodesTest extends TestCase {
         
     }
     
+    /**
+     * Test comparisons of names of streets
+     * O(1)
+     */
     public void testCompareTo() {
         assertEquals(0, street1.compareTo(street1));
         assertEquals(-1, street1.compareTo(street2));
@@ -82,6 +106,10 @@ public class StreetNodesTest extends TestCase {
         assertEquals(-1, street1.compareTo(null));
     }
     
+    /**
+     * test adding nodes that the street goes through
+     * O(1)
+     */
     public void testAddPoint() {
         Point pt = new Point(0, 0);
         ArrayList<String> places = new ArrayList<String>();
@@ -96,9 +124,15 @@ public class StreetNodesTest extends TestCase {
         assertEquals("Fouh: (0,0) ", street1.toString());
     }
     
+    /**
+     * Check return value for string
+     * representation of street name and locations
+     * O(n)
+     */
     public void testToString() {
         street1.setLocations(nodes1);
-        
         assertEquals("Fouh: (2,2) (3,2) ", street1.toString());
+        
+        assertEquals("SnoopDogg: (No locations available)", street2.toString());
     }
 }
