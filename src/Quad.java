@@ -28,6 +28,8 @@ public class Quad {
     private Quad botLeftTree;
     private Quad botRightTree;
     
+    private BinarySearchTree<StreetNodes> BST;
+    
 
     /**
      * @param topLeft top left node of the map
@@ -41,6 +43,7 @@ public class Quad {
         topRightTree = null;
         botLeftTree = null;
         botRightTree = null;
+        BST = new BinarySearchTree<StreetNodes>();
     }
 
     /**
@@ -168,7 +171,36 @@ public class Quad {
     }
     
     
-    public void insert()
+    public void insert(int x, int y, String description, String...streets)
+    {
+    	Point p = new Point(x, y);
+    	ArrayList<String> list = new ArrayList<String>();
+    	list.add(description);
+    	Node<Point> newNode = new Node<Point>(p, list);
+    	
+    	// if the node hasn't been added to the quad previously
+    	if (search(newNode.getPoint()) == null) {
+    		insert(newNode);
+    	}
+    	// ends if the node has already been added
+    	else {
+    		return;
+    	}
+    	// traverses the array of strings
+    	for(int i = 0; i < streets.length; i++) {
+    		newNode.getPlaces().add(streets[i]);
+    		StreetNodes sNode = new StreetNodes(streets[i]);
+    		// if the street node isn't already in the BST add it
+    		if (BST.find(sNode) == null) {
+    			sNode.addPoint(newNode);
+    			BST.insert(sNode);
+    		}
+    		// if the street node is in the BST add the newNode into it
+    		else {
+    			BST.find(sNode).addPoint(newNode);
+    		}
+    	}
+    }
 
     /**
      * O(log(n))
