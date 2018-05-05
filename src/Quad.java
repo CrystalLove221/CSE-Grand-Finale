@@ -166,6 +166,9 @@ public class Quad {
         botRightTree.insert(newNode);
         return;
     }
+    
+    
+    public void insert()
 
     /**
      * O(log(n))
