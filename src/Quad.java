@@ -201,6 +201,12 @@ public class Quad {
     		}
     	}
     }
+    
+    
+    public ArrayList<Node<Point>> streetSearch(String streetName) {
+    	StreetNodes sNode = new StreetNodes(streetName);
+    	return BST.find(sNode).getLocations();
+    }
 
     /**
      * O(log(n))
