@@ -163,4 +163,42 @@ public class QuadTest extends TestCase {
         //but it does have a toString() !
         assertEquals(check.toString(), map.search("baron").toString());
     }
+    
+    /**
+     * test insert(int x, int y, String desc, String... streets)
+     */
+    public void testImprovedInsert() {
+        map.insert(3, 3, "Love", "Fouh");
+        
+        
+    }
+    
+    /**
+     * test for streetSearch(String streetName)
+     */
+    public void testStreetSearchLocations() {
+        
+        map.insert(3, 3, "Love", "Fouh");
+        map.insert(4, 3, "Hate", "Fouh");
+        
+        ArrayList<String> lovePlaces = map.search(3, 3).getPlaces();
+        ArrayList<String> hatePlaces = map.search(4, 3).getPlaces();
+        
+        lovePlaces.add("Justice");
+        lovePlaces.add("Truth");
+        
+        hatePlaces.add("Lies");
+        hatePlaces.add("Evil");
+        
+        assertEquals(lovePlaces, map.streetSearch("Fouh").get(0).getPlaces());
+        assertEquals(hatePlaces, map.streetSearch("Fouh").get(1).getPlaces());
+        assertNull(map.streetSearch("Hate"));
+    }
+    
+    /**
+     * test for streetSearch(String streetName, String type_of_place)
+     */
+    public void testStreetSearchPlaces() {
+        //awaiting implementation
+    }
 }
