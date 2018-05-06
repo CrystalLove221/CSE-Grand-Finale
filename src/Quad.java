@@ -205,22 +205,30 @@ public class Quad {
     
     public ArrayList<Node<Point>> streetSearch(String streetName) {
     	StreetNodes sNode = new StreetNodes(streetName);
-    	return BST.find(sNode).getLocations();
+    	if (BST.find(sNode) == null) {
+    		return null;
+    	} else {
+    		return BST.find(sNode).getLocations();
+    	}
     }
     
     
     public ArrayList<Node<Point>>streetSearch(String streetName, String type_of_place) {
     	StreetNodes sNode = new StreetNodes(streetName);
     	ArrayList<Node<Point>> result = new ArrayList<Node<Point>>();
-    	
+    	// if the node can't be found return null
     	if (BST.find(sNode) == null) {
     		return null;
     	}
+    	//otherwise return the locations
     	else {
     		result = BST.find(sNode).getLocations();
     	}
     	return result;
     }
+    
+    
+    
 
     /**
      * O(log(n))
