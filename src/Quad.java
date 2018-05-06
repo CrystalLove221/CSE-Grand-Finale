@@ -215,6 +215,7 @@ public class Quad {
     
     public ArrayList<Node<Point>>streetSearch(String streetName, String type_of_place) {
     	StreetNodes sNode = new StreetNodes(streetName);
+    	ArrayList<Node<Point>> list = new ArrayList<Node<Point>>();
     	ArrayList<Node<Point>> result = new ArrayList<Node<Point>>();
     	// if the node can't be found return null
     	if (BST.find(sNode) == null) {
@@ -222,7 +223,14 @@ public class Quad {
     	}
     	//otherwise return the locations
     	else {
-    		result = BST.find(sNode).getLocations();
+    		list = BST.find(sNode).getLocations();
+    	}
+    	//traverses the array of node points (locations) and checks to see if their locations
+    	//array list contains the type of place. If so it adds them to the result and then returns it
+    	for (int i = 0; i < list.size(); i++) {
+    		if(list.get(i).getPlaces().contains(type_of_place)) {
+    			result.add(list.get(i));
+    		}	
     	}
     	return result;
     }
