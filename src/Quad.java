@@ -202,7 +202,10 @@ public class Quad {
     	ArrayList<String> list = new ArrayList<String>();
     	list.add(description);
     	Node<Point> newNode = new Node<Point>(p, list);
-    	
+    	// if the point is not in the quad end method
+    	if (!inQuad(p)) {
+    		return;
+    	}   	
     	// if the node hasn't been added to the quad previously
     	if (search(newNode.getPoint()) == null) {
     		insert(newNode);
@@ -244,7 +247,7 @@ public class Quad {
     	ArrayList<Node<Point>> result = new ArrayList<Node<Point>>();
     	StreetNodes sNode = new StreetNodes(streetName);
     	if (location != null && BST.find(sNode) != null) {
-            //we've reached the end of the tree
+            //we've reached a leaf node and the node is not empty and the street node can be found
             result.addAll(BST.find(sNode).getLocations());
         }
         if (topLeftTree != null) {
