@@ -241,12 +241,25 @@ public class Quad {
      * @return the list of locations the street passes through
      */
     public ArrayList<Node<Point>> streetSearch(String streetName) {
+    	ArrayList<Node<Point>> result = new ArrayList<Node<Point>>();
     	StreetNodes sNode = new StreetNodes(streetName);
-    	if (BST.find(sNode) == null) {
-    		return null;
-    	} else {
-    		return BST.find(sNode).getLocations();
-    	}
+    	if (location != null && BST.find(sNode) != null) {
+            //we've reached the end of the tree
+            result.addAll(BST.find(sNode).getLocations());
+        }
+        if (topLeftTree != null) {
+             result.addAll(topLeftTree.streetSearch(streetName));
+        }
+        if (botLeftTree != null) {
+            result.addAll(botLeftTree.streetSearch(streetName));
+        }
+        if (topRightTree != null) {
+            result.addAll(topRightTree.streetSearch(streetName));
+        }
+        if (botRightTree != null) {
+            result.addAll(botRightTree.streetSearch(streetName));
+        }
+        return result;
     }
     
     
@@ -265,17 +278,9 @@ public class Quad {
      * @return ArrayList of locations containing type_of_place
      */
     public ArrayList<Node<Point>>streetSearch(String streetName, String type_of_place) {
-    	StreetNodes sNode = new StreetNodes(streetName);
     	ArrayList<Node<Point>> list = new ArrayList<Node<Point>>();
     	ArrayList<Node<Point>> result = new ArrayList<Node<Point>>();
-    	// if the node can't be found return null
-    	if (BST.find(sNode) == null) {
-    		return null;
-    	}
-    	//otherwise return the locations
-    	else {
-    		list = BST.find(sNode).getLocations();
-    	}
+    	list = streetSearch(streetName);
     	//traverses the array of node points (locations) and checks to see if their locations
     	//array list contains the type of place. If so it adds them to the result and then returns it
     	for (int i = 0; i < list.size(); i++) {
@@ -289,15 +294,17 @@ public class Quad {
     
     public ArrayList<Node<Point>> streetSearch(int originX, int originY, String streetName, String type_of_place) {
     	ArrayList<Node<Point>> list = new ArrayList<Node<Point>>();
+    	ArrayList<Node<Point>> result = new ArrayList<Node<Point>>();
     	list = streetSearch(streetName, type_of_place);
-    	MinHeap heap = new MinHeap(0, 0, list.size());
+    	Node<Point>[] list2 = (Node<Point>[]) list.toArray();
+    	MinHeap heap = new MinHeap(list2, 0, list.size());
     	for (int i = 0; i < list.size(); i++) {
     		int x = list.get(i).getPoint().getX();
     		int y = list.get(i).getPoint().getY();
     		list.get(i).setDistance(Math.sqrt(((originX - x) * (originX - x)) + ((originY - y) * (originY - y))));
     		heap.insert(list.get(i));
-    		
     	}
+    	
     }
 
     /**
