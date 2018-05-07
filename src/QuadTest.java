@@ -171,7 +171,7 @@ public class QuadTest extends TestCase {
         
         map.insert(3, 3, "Love", "Fouh");
         map.insert(4, 3, "Hate", "Fouh");
-        //map.insert(3, 3, "Inbetween", "Fouh");
+        map.insert(3, 3, "Inbetween", "Fouh");
         
         Node<Point> loveNode = map.search(3, 3);
         Node<Point> hateNode = map.search(4, 3);
