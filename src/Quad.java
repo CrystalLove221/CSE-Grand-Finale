@@ -286,6 +286,19 @@ public class Quad {
     	return result;
     }
     
+    
+    public ArrayList<Node<Point>> streetSearch(int originX, int originY, String streetName, String type_of_place) {
+    	ArrayList<Node<Point>> list = new ArrayList<Node<Point>>();
+    	list = streetSearch(streetName, type_of_place);
+    	MinHeap heap = new MinHeap(0, 0, list.size());
+    	for (int i = 0; i < list.size(); i++) {
+    		int x = list.get(i).getPoint().getX();
+    		int y = list.get(i).getPoint().getY();
+    		list.get(i).setDistance(Math.sqrt(((originX - x) * (originX - x)) + ((originY - y) * (originY - y))));
+    		heap.insert(list.get(i));
+    		
+    	}
+    }
 
     /**
      * O(log(n))
