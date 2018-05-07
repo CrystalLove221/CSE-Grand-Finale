@@ -168,8 +168,27 @@ public class QuadTest extends TestCase {
      * test insert(int x, int y, String desc, String... streets)
      */
     public void testImprovedInsert() {
-        map.insert(3, 3, "Love", "Fouh");
         
+        map.insert(3, 3, "Love", "Fouh");
+        map.insert(4, 3, "Hate", "Fouh");
+        map.insert(3, 3, "Inbetween", "Fouh");
+        
+        Node<Point> loveNode = map.search(3, 3);
+        Node<Point> hateNode = map.search(4, 3);
+        
+        ArrayList<String> lovePlaces = map.search(3, 3).getPlaces();
+        ArrayList<String> hatePlaces = map.search(4, 3).getPlaces();
+        
+        lovePlaces.add("Justice");
+        lovePlaces.add("Truth");
+        
+        hatePlaces.add("Lies");
+        hatePlaces.add("Evil");
+        
+        assertTrue(map.streetSearch("Fouh").contains(loveNode));
+        assertTrue(map.streetSearch("Fouh").contains(hateNode));
+        assertFalse(map.search(3, 3).getPlaces().contains("Inbetween"));
+        assertNull(map.streetSearch("Hate"));
         
     }
     
@@ -199,6 +218,43 @@ public class QuadTest extends TestCase {
      * test for streetSearch(String streetName, String type_of_place)
      */
     public void testStreetSearchPlaces() {
-        //awaiting implementation
+        
+        map.insert(3, 3, "Love", "Fouh");
+        map.insert(4, 3, "Hate", "Fouh");
+        map.insert(5, 3, "Middle", "Fouh");
+        
+        Node<Point> loveNode = map.search(3, 3);
+        Node<Point> hateNode = map.search(4, 3);
+        Node<Point> midNode = map.search(5, 3);
+        
+        ArrayList<String> lovePlaces = map.search(3, 3).getPlaces();
+        ArrayList<String> hatePlaces = map.search(4, 3).getPlaces();
+        ArrayList<String> midPlaces = map.search(5, 3).getPlaces();
+        
+        lovePlaces.add("Justice");
+        lovePlaces.add("Truth");
+        
+        hatePlaces.add("Lies");
+        hatePlaces.add("Evil");
+        
+        midPlaces.add("Truth");
+        midPlaces.add("Lies");
+        midPlaces.add("Confusion");
+        
+        assertEquals(loveNode, map.streetSearch("Fouh", "Truth").get(0));
+        assertEquals(midNode, map.streetSearch("Fouh", "Truth").get(1));
+        
+        assertEquals(hateNode, map.streetSearch("Fouh", "Lies").get(0));
+        assertEquals(midNode, map.streetSearch("Fouh", "Lies").get(1));
+        
+        assertEquals(hateNode, map.streetSearch("Fouh", "Evil").get(0));
+        assertEquals(1, map.streetSearch("Fouh", "Evil").size());
+        
+        assertEquals(midNode, map.streetSearch("Fouh", "Confusion").get(0));
+        
+        assertEquals(loveNode, map.streetSearch("Fouh", "Justice").get(0));
+        
+        assertEquals("[]", map.streetSearch("Fouh", "Purgatory").toString());
+        assertNull(map.streetSearch("Loew Dr.", "Mall"));
     }
 }

@@ -171,6 +171,31 @@ public class Quad {
     }
     
     
+    /**
+     * This method expands on the above insert method by taking into
+     * account streets that pass through Node<Point> objects.
+     * 
+     * It first creates Node and StreetNode instances to search for
+     * in the quad tree. If Node is non-existent, it will be added
+     * to the quad.
+     * For each StreetNode with name from streets ArrayList not found in
+     * the binarysearch tree, it will be added after the node has been
+     * added to its list of locations that it passes through.
+     * Every street in streets ArrayList will be added to the
+     * Node's list of streets adjacent to it.
+     * 
+     * If StreetNode is found in BST, the method will simply
+     * add Node<Point> object to StreetNode's list of locations.
+     * 
+     * If Node<Point> is found, then nothing happens (return)
+     * 
+     * O(n log n)
+     * 
+     * @param x x coordinate of the new node
+     * @param y y coordinate of the new node
+     * @param description the type of place to be added to location
+     * @param streets the list of streets the node is adjacent to
+     */
     public void insert(int x, int y, String description, String...streets)
     {
     	Point p = new Point(x, y);
@@ -203,6 +228,18 @@ public class Quad {
     }
     
     
+    /**
+     * Takes a street name and returns an ArrayList of locations
+     * that are on the street.
+     * 
+     * Null if street is not found in the binary search tree (thus not on map)
+     * 
+     * O(log n)
+     * 
+     * @param streetName the name of the street to search for and 
+     * return list of locations.
+     * @return the list of locations the street passes through
+     */
     public ArrayList<Node<Point>> streetSearch(String streetName) {
     	StreetNodes sNode = new StreetNodes(streetName);
     	if (BST.find(sNode) == null) {
@@ -213,6 +250,20 @@ public class Quad {
     }
     
     
+    /**
+     * Taking a street name and type_of_place to search for,
+     * this method returns all the locations on the street that
+     * contains the desired place the user wants to find
+     * (stored in an ArrayList)
+     * 
+     * 
+     * O(n^2) ????
+     * 
+     * @param streetName the street to search for type_of_place on
+     * @param type_of_place the business/organization/place to look for
+     * on street
+     * @return ArrayList of locations containing type_of_place
+     */
     public ArrayList<Node<Point>>streetSearch(String streetName, String type_of_place) {
     	StreetNodes sNode = new StreetNodes(streetName);
     	ArrayList<Node<Point>> list = new ArrayList<Node<Point>>();
@@ -234,8 +285,6 @@ public class Quad {
     	}
     	return result;
     }
-    
-    
     
 
     /**
@@ -346,4 +395,5 @@ public class Quad {
         }
         return foundPlaces;
     }
+    
 }
