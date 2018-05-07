@@ -216,7 +216,7 @@ public class Quad {
     	}
     	// traverses the array of strings
     	for(int i = 0; i < streets.length; i++) {
-    		newNode.getPlaces().add(streets[i]);
+    		newNode.getStreets().add(streets[i]);
     		StreetNodes sNode = new StreetNodes(streets[i]);
     		// if the street node isn't already in the BST add it
     		if (BST.find(sNode) == null) {
