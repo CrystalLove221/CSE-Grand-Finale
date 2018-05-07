@@ -304,7 +304,10 @@ public class Quad {
     		list.get(i).setDistance(Math.sqrt(((originX - x) * (originX - x)) + ((originY - y) * (originY - y))));
     		heap.insert(list.get(i));
     	}
-    	
+    	for (int j = 0; j < list.size(); j++) {
+    		result.add((Node<Point>)heap.removemin());
+    	}
+    	return result;
     }
 
     /**
