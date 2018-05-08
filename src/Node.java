@@ -1,8 +1,12 @@
 import java.util.ArrayList;
 
 /**
- * @author Tyler Hogue 33%
- * @version 2018.04.20
+ * Part 2:
+ * @author Tyler Hogue 50%
+ * @author Jake Cohen 50%
+ * @author Ryan Bellinger 0%
+ * @version 2018.05.8
+ * 
  * @param <E> a generic, in this case will be Point
  */
 public class Node<E> implements Comparable<Node<E>> {

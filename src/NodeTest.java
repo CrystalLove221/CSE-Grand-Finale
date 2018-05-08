@@ -2,10 +2,11 @@ import java.util.ArrayList;
 import student.TestCase;
 
 /**
- * @author Evan 33%
- * @author Cam 33%
- * @author Tyler Hogue 33%
- * @version 2018.4.18
+ * Part 2:
+ * @author Jake Cohen 50%
+ * @author Ryan Bellinger 0%
+ * @author Tyler Hogue 50%
+ * @version 2018.5.8
  *
  */
 public class NodeTest extends TestCase {

@@ -6,9 +6,11 @@ import org.junit.Test;
 import student.TestCase;
 
 /**
+ * Part 2:
  * @author Tyler Hogue 50%
- * @author Jake 50%
- * @version 2018.05.7
+ * @author Jake Cohen 50%
+ * @author Ryan Bellinger 0%
+ * @version 2018.05.8
  */
 public class QuadTest extends TestCase {
     private Quad map;
@@ -264,6 +266,46 @@ public class QuadTest extends TestCase {
      * String streetName, String type_of_place)
      */
     public void testStreetSearchDistance() {
+        map.insert(0, 1, "A", "Fouh");
+        Node<Point> node1 = map.search(0, 1);
+        node1.getPlaces().add("C");
         
+        map.insert(1, 2, "B", "Fouh");
+        Node<Point> node3 = map.search(1, 2);
+        node3.getPlaces().add("D");
+        
+        map.insert(2, 2, "B", "Fouh");
+        Node<Point> node4 = map.search(2, 2);
+        node4.getPlaces().add("C");
+        
+        map.insert(3, 2, "B", "Fouh");
+        Node<Point> node5 = map.search(3, 2);
+        
+        ArrayList<Node<Point>> resultLocations = new ArrayList<Node<Point>>();
+        resultLocations.add(node3);
+        
+        assertEquals(resultLocations, map.streetSearch(3, 1, "Fouh", "D"));
+        assertEquals(2.24, node3.getDistance(), 0.01);
+        
+        resultLocations.clear();
+        resultLocations.add(node4);
+        resultLocations.add(node1);
+        
+        assertEquals(resultLocations, map.streetSearch(3, 1, "Fouh", "C"));
+        assertEquals(3, node1.getDistance());
+        assertEquals(1.41, node4. getDistance(), 0.01);
+        
+        resultLocations.clear();
+        resultLocations.add(node5);
+        resultLocations.add(node4);
+        resultLocations.add(node3);
+        
+        assertEquals(resultLocations, map.streetSearch(3, 1, "Fouh", "B"));
+        assertEquals(1, node5.getDistance());
+        assertEquals(1.41, node4.getDistance());
+        assertEquals(2.24, node3.getDistance());
+        
+        assertEquals("[]", map.streetSearch("Fouh", "Purgatory").toString());
+        assertEquals("[]", map.streetSearch("Loew Dr.", "Mall").toString());
     }
 }
