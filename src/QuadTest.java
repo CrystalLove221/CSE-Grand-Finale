@@ -187,7 +187,7 @@ public class QuadTest extends TestCase {
         assertTrue(map.streetSearch("Fouh").contains(loveNode));
         assertTrue(map.streetSearch("Fouh").contains(hateNode));
         assertFalse(map.search(3, 3).getPlaces().contains("Inbetween"));
-        assertNull(map.streetSearch("Hate"));
+        assertEquals("[]", map.streetSearch("Hate").toString());
         
     }
     
@@ -208,9 +208,9 @@ public class QuadTest extends TestCase {
         hateNode.getPlaces().add("Lies");
         hateNode.getPlaces().add("Evil");
         
-        assertEquals(0, map.streetSearch("Fouh").size());
+        assertTrue(map.streetSearch("Fouh").contains(loveNode));
         assertTrue(map.streetSearch("Fouh").contains(hateNode));
-        assertNull(map.streetSearch("Hate"));
+        assertEquals("[]", map.streetSearch("Hate").toString());
     }
     
     /**
@@ -256,7 +256,7 @@ public class QuadTest extends TestCase {
         assertTrue(map.streetSearch("Fouh", "Justice").contains(loveNode));
         
         assertEquals("[]", map.streetSearch("Fouh", "Purgatory").toString());
-        assertNull(map.streetSearch("Loew Dr.", "Mall"));
+        assertEquals("[]", map.streetSearch("Loew Dr.", "Mall").toString());
     }
     
     /**

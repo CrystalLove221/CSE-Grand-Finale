@@ -247,9 +247,10 @@ public class Quad {
     public ArrayList<Node<Point>> streetSearch(String streetName) {
     	ArrayList<Node<Point>> result = new ArrayList<Node<Point>>();
     	StreetNodes sNode = new StreetNodes(streetName);
-    	if (location != null && BST.find(sNode) != null) {
+    	if (BST.find(sNode) != null) {
             //we've reached a leaf node and the node is not empty and the street node can be found
             result.addAll(BST.find(sNode).getLocations());
+            System.out.println("base");
         }
         if (topLeftTree != null) {
              result.addAll(topLeftTree.streetSearch(streetName));
