@@ -6,10 +6,9 @@ import org.junit.Test;
 import student.TestCase;
 
 /**
- * @author Evan Hruskar 33%
- * @author Cam 33%
- * @author Tyler 33%
- * @version 2018.04.19
+ * @author Tyler Hogue 50%
+ * @author Jake 50%
+ * @version 2018.05.7
  */
 public class QuadTest extends TestCase {
     private Quad map;
@@ -209,7 +208,7 @@ public class QuadTest extends TestCase {
         hateNode.getPlaces().add("Lies");
         hateNode.getPlaces().add("Evil");
         
-        assertTrue(map.streetSearch("Fouh").contains(loveNode));
+        assertEquals(0, map.streetSearch("Fouh").size());
         assertTrue(map.streetSearch("Fouh").contains(hateNode));
         assertNull(map.streetSearch("Hate"));
     }
@@ -226,6 +225,7 @@ public class QuadTest extends TestCase {
         Node<Point> loveNode = map.search(3, 3);
         Node<Point> hateNode = map.search(4, 3);
         Node<Point> midNode = map.search(5, 3);
+        assertTrue(loveNode.getPlaces().contains("Love"));
         
         ArrayList<String> lovePlaces = map.search(3, 3).getPlaces();
         ArrayList<String> hatePlaces = map.search(4, 3).getPlaces();
@@ -263,7 +263,7 @@ public class QuadTest extends TestCase {
      * test for streetSearch(int originX, int originY,
      * String streetName, String type_of_place)
      */
-    public void testStreetSearch() {
+    public void testStreetSearchDistance() {
         
     }
 }

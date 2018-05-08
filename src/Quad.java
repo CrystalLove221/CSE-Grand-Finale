@@ -1,7 +1,8 @@
 import java.util.ArrayList;
 
 /**
- * @author 
+ * @author Tyler Hogue 50%
+ * @author Jake 50%
  * @version 2018.05.5
  */
 
@@ -273,7 +274,7 @@ public class Quad {
      * (stored in an ArrayList)
      * 
      * 
-     * O(n^2) ????
+     * O(n^2)
      * 
      * @param streetName the street to search for type_of_place on
      * @param type_of_place the business/organization/place to look for
@@ -305,8 +306,8 @@ public class Quad {
     		int x = list.get(i).getPoint().getX();
     		int y = list.get(i).getPoint().getY();
     		list.get(i).setDistance(Math.sqrt(((originX - x) * (originX - x)) + ((originY - y) * (originY - y))));
-    		heap.insert(list.get(i));
     	}
+    	heap.buildheap();
     	for (int j = 0; j < list.size(); j++) {
     		result.add((Node<Point>)heap.removemin());
     	}
