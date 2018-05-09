@@ -302,6 +302,9 @@ public class Quad {
      * Taking a street name and type_of_place to search for,
      * this method returns all the locations on the street that
      * contains the desired place the user wants to find
+     * and takes the coordinates of an origin point to calculate distance
+     * returns the list in order of increasing distance
+     * from origin
      * (stored in an ArrayList)
      * 
      * 
@@ -312,7 +315,7 @@ public class Quad {
      * on street
      * @param originX the point which to use to find distance
      * @param originY the point which to use to find distance
-     * @return ArrayList of locations containing type_of_place
+     * @return ArrayList of locations containing type_of_place in order of ascending distances
      */
 	public ArrayList<Node<Point>> streetSearch(int originX, int originY, String streetName, String type_of_place) {
     	ArrayList<Node<Point>> list = new ArrayList<Node<Point>>();
