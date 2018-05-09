@@ -1,11 +1,10 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
- * Part 2:
  * @author Tyler Hogue 50%
- * @author Jake Cohen 50%
- * @author Ryan Bellinger 0%
- * @version 2018.05.8
+ * @author Jake 50%
+ * @version 2018.05.5
  */
 
 /*
@@ -299,23 +298,17 @@ public class Quad {
     }
     
     
-    /**
-     * O(n log n)
-     * 
-     * @param originX x coordinate of one's current position on the map
-     * @param originY y coordinate of one's position on the map
-     * @param streetName the name of street on which to search for
-     * type_of_place
-     * @param type_of_place type of place or business one is looking for
-     * that is on the street
-     * @return list of locations that is on the street and contains
-     * type_of_place
-     */
-    public ArrayList<Node<Point>> streetSearch(int originX, int originY, String streetName, String type_of_place) {
+
+	public ArrayList<Node<Point>> streetSearch(int originX, int originY, String streetName, String type_of_place) {
     	ArrayList<Node<Point>> list = new ArrayList<Node<Point>>();
     	ArrayList<Node<Point>> result = new ArrayList<Node<Point>>();
+    	ArrayList<Comparable<Node<Point>>> result1 = new ArrayList<Comparable<Node<Point>>>();
+     	
     	list = streetSearch(streetName, type_of_place);
-    	Node<Point>[] list2 = (Node<Point>[]) list.toArray();
+    	Comparable[] list2 = new Comparable[list.size()];
+    	for (int j = 0; j < list.size(); j++) {
+    		list2[j] = list.get(j);
+    	}
     	MinHeap heap = new MinHeap(list2, 0, list.size());
     	for (int i = 0; i < list.size(); i++) {
     		int x = list.get(i).getPoint().getX();
@@ -323,8 +316,9 @@ public class Quad {
     		list.get(i).setDistance(Math.sqrt(((originX - x) * (originX - x)) + ((originY - y) * (originY - y))));
     	}
     	heap.buildheap();
-    	for (int j = 0; j < list.size(); j++) {
-    		result.add((Node<Point>)heap.removemin());
+    	Node<Point> min = (Node<Point>) (heap.removemin());
+    	for (int k = 0; k < list.size(); k++) {
+    		result.add((Node<Point>) heap.removemin());
     	}
     	return result;
     }
