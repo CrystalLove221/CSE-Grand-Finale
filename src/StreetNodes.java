@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 /**
  * @author Tyler Hogue (50%)
+ * @author Jake Cohen  (50%)
  * @version 5.5.2018
  *
  */
