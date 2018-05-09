@@ -298,7 +298,22 @@ public class Quad {
     }
     
     
-
+    /**
+     * Taking a street name and type_of_place to search for,
+     * this method returns all the locations on the street that
+     * contains the desired place the user wants to find
+     * (stored in an ArrayList)
+     * 
+     * 
+     * O(n^2)
+     * 
+     * @param streetName the street to search for type_of_place on
+     * @param type_of_place the business/organization/place to look for
+     * on street
+     * @param originX the point which to use to find distance
+     * @param originY the point which to use to find distance
+     * @return ArrayList of locations containing type_of_place
+     */
 	public ArrayList<Node<Point>> streetSearch(int originX, int originY, String streetName, String type_of_place) {
     	ArrayList<Node<Point>> list = new ArrayList<Node<Point>>();
     	ArrayList<Node<Point>> result = new ArrayList<Node<Point>>();
@@ -316,7 +331,6 @@ public class Quad {
     		list.get(i).setDistance(Math.sqrt(((originX - x) * (originX - x)) + ((originY - y) * (originY - y))));
     	}
     	heap.buildheap();
-    	Node<Point> min = (Node<Point>) (heap.removemin());
     	for (int k = 0; k < list.size(); k++) {
     		result.add((Node<Point>) heap.removemin());
     	}
