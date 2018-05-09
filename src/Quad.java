@@ -334,6 +334,7 @@ public class Quad {
     		list.get(i).setDistance(Math.sqrt(((originX - x) * (originX - x)) + ((originY - y) * (originY - y))));
     	}
     	heap.buildheap();
+    	//We get a casting error when trying to add the results from remove min into the arraylist
     	for (int k = 0; k < list.size(); k++) {
     		result.add((Node<Point>) heap.removemin());
     	}
