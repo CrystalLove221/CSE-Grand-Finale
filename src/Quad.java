@@ -321,22 +321,22 @@ public class Quad {
     	ArrayList<Node<Point>> list = new ArrayList<Node<Point>>();
     	ArrayList<Node<Point>> result = new ArrayList<Node<Point>>();
     	ArrayList<Comparable<Node<Point>>> result1 = new ArrayList<Comparable<Node<Point>>>();
-     	
+     	//create an empty array
     	list = streetSearch(streetName, type_of_place);
     	Comparable[] list2 = new Comparable[list.size()];
-    	for (int j = 0; j < list.size(); j++) {
-    		list2[j] = list.get(j);
-    	}
     	MinHeap heap = new MinHeap(list2, 0, list.size());
     	for (int i = 0; i < list.size(); i++) {
     		int x = list.get(i).getPoint().getX();
     		int y = list.get(i).getPoint().getY();
     		list.get(i).setDistance(Math.sqrt(((originX - x) * (originX - x)) + ((originY - y) * (originY - y))));
     	}
-    	heap.buildheap();
-    	//We get a casting error when trying to add the results from remove min into the arraylist
+    	//adds manually into the heap rather than builds it
+    	for (int j = 0; j < list.size(); j++) {
+    		heap.insert(list.get(j));
+    	}
+    	//We get a casting warning when trying to add the results from remove min into the arraylist
     	for (int k = 0; k < list.size(); k++) {
-    		result.add((Node<Point>) heap.removemin());
+    		result.add((Node<Point>)heap.removemin());
     	}
     	return result;
     }

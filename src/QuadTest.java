@@ -292,7 +292,7 @@ public class QuadTest extends TestCase {
         resultLocations.add(node1);
         
         assertEquals(resultLocations, map.streetSearch(3, 1, "Fouh", "C"));
-        assertEquals(3, node1.getDistance());
+        assertEquals(3.0, node1.getDistance(), 0.01);
         assertEquals(1.41, node4. getDistance(), 0.01);
         
         resultLocations.clear();
@@ -301,9 +301,9 @@ public class QuadTest extends TestCase {
         resultLocations.add(node3);
         
         assertEquals(resultLocations, map.streetSearch(3, 1, "Fouh", "B"));
-        assertEquals(1, node5.getDistance());
-        assertEquals(1.41, node4.getDistance());
-        assertEquals(2.24, node3.getDistance());
+        assertEquals(1.0, node5.getDistance(), 0.01);
+        assertEquals(1.41, node4.getDistance(), 0.01);
+        assertEquals(2.24, node3.getDistance(), 0.01);
         
         assertEquals("[]", map.streetSearch("Fouh", "Purgatory").toString());
         assertEquals("[]", map.streetSearch("Loew Dr.", "Mall").toString());
